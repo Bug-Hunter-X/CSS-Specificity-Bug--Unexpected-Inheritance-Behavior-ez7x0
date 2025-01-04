@@ -1,0 +1,30 @@
+The issue stems from the way CSS specificity works.  While `.container p span` is a more specific selector than `.container`, it's less specific than `.container p`, which inherits the font-size from the parent element.  The solution is to use a more specific selector to override the parent's inherited `font-size`:
+
+```css
+.container {
+  font-size: 16px;
+}
+
+.container p {
+  font-size: 18px;
+}
+
+.container span {
+  font-size: 14px;
+}
+
+.container span.emphasized {
+  font-size: 20px;
+}
+
+.container p span {
+  font-size: 16px; /* Using !important is not recommended */
+}
+
+/* Solution */
+.container p span {
+  font-size: 14px; /* Correctly applying styles overriding inherited values from parent selectors */
+}
+```
+
+By directly targeting `.container p span`, and applying a more specific selector, we can correctly override any inherited styles and achieve the desired outcome without relying on `!important`.
