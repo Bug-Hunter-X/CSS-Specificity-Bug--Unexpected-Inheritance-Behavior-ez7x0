@@ -1,0 +1,25 @@
+The following CSS code snippet demonstrates an uncommon issue where the expected specificity rules are not applied correctly due to a subtle combination of selectors and inheritance:
+
+```css
+.container {
+  font-size: 16px;
+}
+
+.container p {
+  font-size: 18px;
+}
+
+.container span {
+  font-size: 14px;
+}
+
+.container span.emphasized {
+  font-size: 20px;
+}
+
+.container p span {
+  font-size: 16px; /* Unexpected! */
+}
+```
+
+In this example, we expect the nested `<span>` within the paragraph to inherit and override the `font-size` set for the paragraph, and the selector `.container p span` is applied. However, due to specificity calculation, it ends up using the `font-size` set for the `.container` which is unexpected.
